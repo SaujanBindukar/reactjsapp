@@ -1,0 +1,13 @@
+.contact-adder {
+  background: grey;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 25px;
+}
+
+.contact-list {
+  background: grey;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+}
