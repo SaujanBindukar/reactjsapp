@@ -1,17 +1,61 @@
 import { useState } from "react";
 
-const ContactAdder = () => {
-  const [name, setName] = useState("John");
+const ContactAdder = (props) => {
+  const [name, setName] = useState("");
+  const [mobile, setContact] = useState("");
+  const [location, setLocation] = useState("");
 
-  const onClickPressed = () => {
-    setName("Dave");
+  const onFormSubmitHandler = (e) => {
+    e.preventDefault();
+    const contactData = {
+      id: Math.random(),
+      name: name,
+      number: mobile,
+      location: location,
+    };
+    //add vaidation
+    if (!name || !mobile || !location) {
+      alert("Please fill all fields");
+      return;
+    }
+    //call the function passed from parent component
+
+    props.onContactAdded(contactData);
+    setName("");
+    setContact("");
+    setLocation("");
   };
-  //if we keep onClickPressed() in the button, it will be called when thepage renders
+
   return (
     <>
-      Contact Added:
-      <button onClick={onClickPressed}> Click Me! </button>
-      <p> My name is {name}</p>
+      <div className="simpleAdder">
+        <h3>Contact Added:</h3>
+        <form onSubmit={onFormSubmitHandler}>
+          <input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          ></input>
+          <input
+            type="text"
+            placeholder="Mobile"
+            value={mobile}
+            onChange={(e) => setContact(e.target.value)}
+          ></input>
+
+          <input
+            type="location"
+            placeholder="Location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          ></input>
+          <br />
+          <button className="add-button" style={{ marginTop: "10px" }}>
+            Add Contact
+          </button>
+        </form>
+      </div>
     </>
   );
 };
